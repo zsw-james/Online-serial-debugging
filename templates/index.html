@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    	<meta charset="UTF-8">
+	<title>Show</title>
+    	<script src="//cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
+	    <script>
+	        var sock = new SockJS('http://localhost:5000/echo');
+	        sock.onopen = function()
+	        {
+	            console.log('open');
+	        };
+	        sock.onmessage = function(e)
+	        {
+	            // console.log('message > ', e.data);
+	            document.getElementById('text2').innerHTML = e.data;
+	        };
+	        sock.onclose = function()
+	        {
+	            console.log('close');
+	        };
+	        var func = function()
+	        {
+	        	sock.send("123456")
+	        }
+	    </script>
+</head>
+<body>
+<form action="" method="get">
+	<div>
+		<label>类型:</label>
+		<select id="type" >
+			<option value="USB0">USB0</option>
+			<option value="USB1">USB1</option>
+			<option value="USB2">USB2</option>
+		</select>
+		<label>波特率:</label>
+		<select id="botelv" >
+			<option value="9600">9600</option>
+			<option value="19200">19200</option>
+			<option value="38400">38400</option>
+		</select>
+		<label>数据位:</label>
+		<select id="shujuwei" >
+			<option value="8">8</option>
+			<option value="">19200</option>
+			<option value="">38400</option>
+		</select>
+		<label>校验位:</label>
+		<select id="jiaoyanwei" >
+			<option value="no">N无</option>
+			<option value="19200">19200</option>
+			<option value="38400">38400</option>
+		</select>
+		<label>停止位:<label>
+		<select id="tingzhiwei" >
+			<option value="1">1</option>
+			<option value="19200">19200</option>
+			<option value="38400">38400</option>
+		</select>
+		<input type="radio" name="radiobutton" value="radiobutton" checked> DTR
+		<input type="radio" name="radiobutton" value="radiobutton"> RTS
+	</div>
+<div>
+	<div>  
+		<label><input name="what" type="checkbox" value="自动换行" />自动换行</label>
+		<label><input name="what" type="checkbox" value="显示时间" />显示时间</label>
+		<label><input name="what" type="checkbox" value="冗余校验" />冗余校验</label>
+	</div>
+	<div>
+		<textarea id = "text1" rows="5" cols="30"></textarea>
+		<button onclick="func()">submit</button>
+	</div>
+	<div>
+		<textarea id = "text2" rows = "5" cols="30"></textarea>		
+	</div>
+</div>
+</form> 
+</body>
+</html>
